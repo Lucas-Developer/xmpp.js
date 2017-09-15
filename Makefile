@@ -1,4 +1,4 @@
-PATH := node_modules/.bin:$(PATH)
+ PATH := node_modules/.bin:$(PATH)
 
 .PHONY: setup test clean bundle start stop restart size
 
@@ -36,5 +36,5 @@ restart:
 	./server/ctl restart
 
 size:
-	cd packages/xmpp.js && yarn run prepublish
+	cd packages/client && yarn run prepublish
 	bundlesize

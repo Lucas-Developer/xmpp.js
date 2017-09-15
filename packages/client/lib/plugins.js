@@ -15,3 +15,12 @@ exports.resolve = require('@xmpp/plugins/resolve')
 exports[
   'session-establishment'
 ] = require('@xmpp/plugins/session-establishment')
+exports['disco-callee'] = require('@xmpp/plugins/disco/callee')
+exports['disco-caller'] = require('@xmpp/plugins/disco/caller')
+exports['entity-capabilities'] = require('@xmpp/plugins/entity-capabilities')
+exports['ping-callee'] = require('@xmpp/plugins/ping/callee')
+exports['ping-caller'] = require('@xmpp/plugins/ping/caller')
+exports['time-callee'] = require('@xmpp/plugins/time/callee')
+exports['time-caller'] = require('@xmpp/plugins/time/caller')
+exports['version-callee'] = require('@xmpp/plugins/version/callee')
+exports['version-caller'] = require('@xmpp/plugins/version/caller')

@@ -1,8 +1,9 @@
 'use strict'
 
-const crypto = require('crypto')
 const JID = require('@xmpp/jid')
 const plugin = require('@xmpp/plugin')
+const sha1 = require('./sha1')
+const b64 = require('./b64')
 
 const disco = require('../disco/callee')
 
@@ -76,10 +77,9 @@ function hash(query) {
     })
   })
 
-  return crypto
-    .createHash('sha1')
-    .update(s)
-    .digest('base64')
+  return sha1(s).then(b => {
+    return b64.encode(b)
+  })
 }
 
 module.exports = plugin(
@@ -110,11 +110,13 @@ module.exports = plugin(
 
         const query = disco.build([...disco.features], [...disco.identities])
 
-        stanza.c('c', {
-          xmlns: NS_CAPS,
-          hash: 'sha-1',
-          node: this.node,
-          ver: hash(query),
+        hash(query).then(ver => {
+          stanza.c('c', {
+            xmlns: NS_CAPS,
+            hash: 'sha-1',
+            node: this.node,
+            ver,
+          })
         })
       })
     },
